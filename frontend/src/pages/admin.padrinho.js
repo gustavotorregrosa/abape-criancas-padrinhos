@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import Tabela from '../components/misc/tabela'
 import ModalCriaEdita from '../components/admin/padrinhos/modalCriaEdita'
 import ModalDeleta from '../components/admin/padrinhos/modalDelete'
-import MotoristaContext from '../contexts/PadrinhoContext'
+import PadrinhoContext from '../contexts/PadrinhoContext'
 
-const MotoristaPage = props => {
+const PadrinhoPage = props => {
 
-    const motoristaService = useContext(MotoristaContext)
+    const padrinhoService = useContext(PadrinhoContext)
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -22,8 +22,8 @@ const MotoristaPage = props => {
             label: 'E-mail'
         },
         {
-            name: 'endereco',
-            label: 'Endereco'
+            name: 'sobre',
+            label: 'Sobre'
         },
         {
             name: 'actions',
@@ -31,22 +31,22 @@ const MotoristaPage = props => {
         },
     ]
 
-    const listaMotoristas = async () => {
+    const listaPadrinhos = async () => {
         setLoading(true)
-        const data = await motoristaService.getMotoristas()
+        const data = await padrinhoService.getPadrinhos()
         setData(data)
         setLoading(false)
     }
 
     useEffect(async () => {
-        await listaMotoristas()
+        await listaPadrinhos()
     }, [])
 
     // const ativaLoading = l => setLoading(l)
 
     const openModalNew = ev => {
         ev.preventDefault()
-        const e = new CustomEvent('cria-motoristas')
+        const e = new CustomEvent('cria-padrinhos')
         document.dispatchEvent(e)
     }
 
@@ -55,9 +55,9 @@ const MotoristaPage = props => {
         <div className="container">
             <h4>Padrinhos</h4>
             <a className="waves-effect right" onClick={e => openModalNew(e)}><i className="medium material-icons">add_box</i></a>
-            <Tabela campos={campos} data={data} loading={loading} eventName="motoristas" />
-            <ModalCriaEdita listaMotoristas={() => listaMotoristas()} />
-            <ModalDeleta listaMotoristas={() => listaMotoristas()} />
+            <Tabela campos={campos} data={data} loading={loading} eventName="padrinhos" />
+            <ModalCriaEdita listaPadrinhos={() => listaPadrinhos()} />
+            <ModalDeleta listaPadrinhos={() => listaPadrinhos()} />
         </div>
     </div>)
 }
@@ -68,4 +68,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(MotoristaPage)
+export default connect(mapStateToProps)(PadrinhoPage)

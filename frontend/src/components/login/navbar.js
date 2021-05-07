@@ -28,7 +28,7 @@ const LoginNavbar = props => {
     return (<div>
         <nav className="black">
             <div className="nav-wrapper container">
-                <a href="#" className="brand-logo">Mobi-b</a>
+                <a href="#" className="brand-logo">Abape</a>
                 <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><a href="#" onClick={e => openLogin(e)}>Login</a></li>

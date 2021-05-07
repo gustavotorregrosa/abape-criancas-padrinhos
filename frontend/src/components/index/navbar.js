@@ -25,7 +25,7 @@ const IndexNavbar = props => {
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><a href="#" onClick={e => redirect(e, 'criancas')}>Crianças</a></li>
                     <li><a href="#" onClick={e => redirect(e, 'padrinhos')}>Padrinhos</a></li>
-                    <li><a href="#">Apadrinhamento</a></li>
+                    <li><a href="#" onClick={e => redirect(e, 'apadrinhamento')}>Apadrinhamento</a></li>
                 </ul>
             </div>
         </nav>
@@ -33,7 +33,7 @@ const IndexNavbar = props => {
         <ul ref={navBarMobile} className="sidenav" id="mobile-demo">
             <li><a href="#" onClick={e => redirect(e, 'criancas')}>Crianças</a></li>
             <li><a href="#" onClick={e => redirect(e, 'padrinhos')}>Padrinhos</a></li>
-            <li><a href="#">Apadrinhamento</a></li>
+            <li><a href="#" onClick={e => redirect(e, 'apadrinhamento')}>Apadrinhamento</a></li>
         </ul>
 
     </div>)

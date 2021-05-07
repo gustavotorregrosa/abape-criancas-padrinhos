@@ -1,16 +1,16 @@
 import React, { useRef, useEffect, useState, useContext } from 'react'
-import MotoristaContext from '../../../contexts/PadrinhoContext'
+import PadrinhoContext from '../../../contexts/PadrinhoContext'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css'
 
 const ModalCriaEdita = props => {
 
-    const motoristaService = useContext(MotoristaContext)
+    const padrinhoService = useContext(PadrinhoContext)
 
     const [id, setId] = useState(null)
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
-    const [endereco, setEndereco] = useState('')
+    const [sobre, setSobre] = useState('')
     const [loading, setLoading] = useState(false)
 
     const modal = useRef(null)
@@ -27,20 +27,20 @@ const ModalCriaEdita = props => {
 
     useEffect(() => {
         
-        document.addEventListener('edita-motoristas', e => {
-            let { _id, nome, email, endereco } = e.detail.data
+        document.addEventListener('edita-padrinhos', e => {
+            let { _id, nome, email, sobre } = e.detail.data
             setId(_id)
             setNome(nome)
             setEmail(email)
-            setEndereco(endereco)
+            setSobre(sobre)
             openModal()
         })
 
-        document.addEventListener('cria-motoristas', e => {
+        document.addEventListener('cria-padrinhos', e => {
             setId(null)
             setNome('')
             setEmail('')
-            setEndereco('')
+            setSobre('')
             openModal()
         })
 
@@ -71,10 +71,10 @@ const ModalCriaEdita = props => {
     const doSave = async e => {
         e.preventDefault()
         setLoading(true)
-        await motoristaService.salvaMotorista({ id, nome, email, endereco })
+        await padrinhoService.salvaPadrinho({ id, nome, email, sobre })
         closeModal()
         setLoading(false)
-        await props.listaMotoristas()
+        await props.listaPadrinhos()
     }
 
 
@@ -93,8 +93,8 @@ const ModalCriaEdita = props => {
                 </div>
                 <div className="row">
                     <div className="input-field col s6">
-                        <input value={endereco} id="endereco" onChange={e => setEndereco(e.target.value)} type="text" className="validate" />
-                        <label htmlFor="endereco">Endereço</label>
+                        <input value={sobre} id="sobre" onChange={e => setSobre(e.target.value)} type="text" className="validate" />
+                        <label htmlFor="sobre">Sobre</label>
                     </div>
                 </div>
             </div>

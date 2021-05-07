@@ -54,8 +54,8 @@ const RegisterModal = props => {
             <div className="modal-content">
                 <div className="row">
                     <div className="input-field col s12">
-                        <input id="name" type="text" className="validate" value={nome} onChange={e => changeNome(e)}/>
-                        <label htmlFor="name">Name</label>
+                        <input id="nome" type="text" className="validate" value={nome} onChange={e => changeNome(e)}/>
+                        <label htmlFor="nome">Name</label>
                     </div>
                 </div>
                 <div className="row">

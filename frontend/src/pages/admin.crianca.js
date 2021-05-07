@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import Tabela from '../components/misc/tabela'
 import ModalCriaEdita from '../components/admin/criancas/modalCriaEdita'
 import ModalDeleta from '../components/admin/criancas/modalDelete'
-import PassageiroContext from '../contexts/CriancaContext'
+import CriancaContext from '../contexts/CriancaContext'
 
 const CriancaPage = props => {
 
-    const passageiroService = useContext(PassageiroContext)
+    const criancaService = useContext(CriancaContext)
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -22,8 +22,8 @@ const CriancaPage = props => {
             label: 'E-mail'
         },
         {
-            name: 'endereco',
-            label: 'Endereco'
+            name: 'sobre',
+            label: 'Sobre'
         },
         {
             name: 'actions',
@@ -31,22 +31,22 @@ const CriancaPage = props => {
         },
     ]
 
-    const listaPassageiros = async () => {
+    const listaCriancas = async () => {
         setLoading(true)
-        const data = await passageiroService.getPassageiros()
+        const data = await criancaService.getCriancas()
         setData(data)
         setLoading(false)
     }
 
     useEffect(async () => {
-        await listaPassageiros()
+        await listaCriancas()
     }, [])
 
     // const ativaLoading = l => setLoading(l)
 
     const openModalNew = ev => {
         ev.preventDefault()
-        const e = new CustomEvent('cria-passageiros')
+        const e = new CustomEvent('cria-criancas')
         document.dispatchEvent(e)
     }
 
@@ -55,9 +55,9 @@ const CriancaPage = props => {
         <div className="container">
             <h4>Crianças</h4>
             <a className="waves-effect right" onClick={e => openModalNew(e)}><i className="medium material-icons">add_box</i></a>
-            <Tabela campos={campos} data={data} loading={loading} eventName="passageiros" />
-            <ModalCriaEdita listaPassageiros={() => listaPassageiros()} />
-            <ModalDeleta listaPassageiros={() => listaPassageiros()} />
+            <Tabela campos={campos} data={data} loading={loading} eventName="criancas" />
+            <ModalCriaEdita listaCriancas={() => listaCriancas()} />
+            <ModalDeleta listaCriancas={() => listaCriancas()} />
         </div>
     </div>)
 }

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import NavBar from '../components/index/navbar'
 import { connect } from 'react-redux'
 import UserContext from '../contexts/UserContext'
-import PassageiroAdminPage from './admin.crianca'
+import CriancaAdminPage from './admin.crianca'
 
 const AdminIndexPage = props => {
 
@@ -12,6 +12,7 @@ const AdminIndexPage = props => {
         <NavBar />
         <h3>admin index</h3>
     </div>)
+    
 }
 
 const mapStateToProps = state => {

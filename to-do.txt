@@ -1,0 +1,4 @@
+implementar logout
+logout automatico (pela resposta HTTP)
+CRUD padrinhos
+bug /login nao abre

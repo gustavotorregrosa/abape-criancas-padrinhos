@@ -1,11 +1,11 @@
 import React, {useRef, useEffect, useState, useContext} from 'react'
-import MotoristaContext from '../../../contexts/PadrinhoContext'
+import PadrinhoContext from '../../../contexts/PadrinhoContext'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css'
 
 const ModalDelete = props => {
 
-    const motoristaService = useContext(MotoristaContext)
+    const padrinhoService = useContext(PadrinhoContext)
     
     const [id, setId] = useState('')
     const [nome, setNome] = useState('')
@@ -18,7 +18,7 @@ const ModalDelete = props => {
         
         instance = M.Modal.init(modal.current, {})
 
-        document.addEventListener('deleta-motoristas', e => {
+        document.addEventListener('deleta-padrinhos', e => {
             setId(e.detail.data._id)
             setNome(e.detail.data.nome)
             openModal()
@@ -45,10 +45,10 @@ const ModalDelete = props => {
     const doDelete = async e => {
         e.preventDefault()
         setLoading(true)
-        await motoristaService.deleteMotorista({ id })
+        await padrinhoService.deletePadrinho({ id })
         closeModal()
         setLoading(false)
-        await props.listaMotoristas()  
+        await props.listaPadrinhos()  
     }
 
     const closeModal = () => {

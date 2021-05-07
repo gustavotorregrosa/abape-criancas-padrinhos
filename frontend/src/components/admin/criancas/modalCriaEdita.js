@@ -1,16 +1,16 @@
 import React, { useRef, useEffect, useState, useContext } from 'react'
-import PassageiroContext from '../../../contexts/CriancaContext'
+import CriancaContext from '../../../contexts/CriancaContext'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css'
 
 const ModalCriaEdita = props => {
 
-    const passageiroService = useContext(PassageiroContext)
+    const criancaService = useContext(CriancaContext)
 
     const [id, setId] = useState(null)
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
-    const [endereco, setEndereco] = useState('')
+    const [sobre, setSobre] = useState('')
     const [loading, setLoading] = useState(false)
 
     const modal = useRef(null)
@@ -27,20 +27,20 @@ const ModalCriaEdita = props => {
 
     useEffect(() => {
         
-        document.addEventListener('edita-passageiros', e => {
-            let { _id, nome, email, endereco } = e.detail.data
+        document.addEventListener('edita-criancas', e => {
+            let { _id, nome, email, sobre } = e.detail.data
             setId(_id)
             setNome(nome)
             setEmail(email)
-            setEndereco(endereco)
+            setSobre(sobre)
             openModal()
         })
 
-        document.addEventListener('cria-passageiros', e => {
+        document.addEventListener('cria-criancas', e => {
             setId(null)
             setNome('')
             setEmail('')
-            setEndereco('')
+            setSobre('')
             openModal()
         })
 
@@ -71,10 +71,10 @@ const ModalCriaEdita = props => {
     const doSave = async e => {
         e.preventDefault()
         setLoading(true)
-        await passageiroService.salvarPassageiro({ id, nome, email, endereco })
+        await criancaService.salvarCrianca({ id, nome, email, sobre })
         closeModal()
         setLoading(false)
-        await props.listaPassageiros()
+        await props.listaCriancas()
     }
 
 
@@ -93,8 +93,8 @@ const ModalCriaEdita = props => {
                 </div>
                 <div className="row">
                     <div className="input-field col s6">
-                        <input value={endereco} id="endereco" onChange={e => setEndereco(e.target.value)} type="text" className="validate" />
-                        <label htmlFor="endereco">Endereço</label>
+                        <input value={sobre} id="sobre" onChange={e => setSobre(e.target.value)} type="text" className="validate" />
+                        <label htmlFor="sobre">Sobre</label>
                     </div>
                 </div>
             </div>
