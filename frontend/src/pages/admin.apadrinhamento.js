@@ -2,593 +2,175 @@ import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../components/index/navbar'
 import '../assets/materialize.css'
 import { connect } from 'react-redux'
+import CriancaContext from '../contexts/CriancaContext'
+import PadrinhoContext from '../contexts/PadrinhoContext'
 
 const ApadrinhamentoPage = props => {
 
-    const tabela = () => (<table className="responsive-table highlight">
-        <thead>
-          <tr>
-              <th>Criança/ Padrinho</th>
-              <th>Padrinho 1</th>
-              <th>Padrinho 2</th>
-              <th>Padrinho 3</th>
-              <th>Padrinho 4</th>
-              <th>Padrinho 5</th>
-              <th>Padrinho 6</th>
-              <th>Padrinho 7</th>
-              <th>Padrinho 8</th>
-              <th>Padrinho 9</th>
-              <th>Padrinho 10</th>
-              <th>Padrinho 11</th>
-              <th>Padrinho 12</th>
-              <th>Padrinho 13</th>
-              <th>Padrinho 14</th>
-          </tr>
-        </thead>
+  const criancaService = useContext(CriancaContext)
+  const padrinhoService = useContext(PadrinhoContext)
 
-        <tbody>
-          <tr>
-            <th>Crianca 1</th>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-          </tr>
+  const [listaCriancas, setListaCriancas] = useState([])
+  const [listaPadrinhos, setListaPadrinhos] = useState([])
+  const [loading, setLoading] = useState(true)
 
-          <tr>
-            <th>Crianca 2</th>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-          </tr>
+  const [apadrinhamento, setApadrinhamento] = useState([])
+
+  const isCriancaApadrinhadaPorPadrinho = (crianca, padrinho) => {
+    let isApadrinhada = false
+    apadrinhamento.map(ap => {
+      if(ap.padrinho == padrinho._id && ap.crianca == crianca._id){
+        isApadrinhada = true
+      }
+    })
+
+    return isApadrinhada
+  }
+
+  const apadrinhar = (crianca, padrinho) => {
+    let novoApadrinhamento = [
+      ...apadrinhamento
+    ]
+
+    novoApadrinhamento.push({
+      padrinho: padrinho._id,
+      crianca: crianca._id
+    })
+
+    setApadrinhamento(novoApadrinhamento)
+  }
+
+  const desapadrinhar = (crianca, padrinho) => {
+    let novoApadrinhamento = apadrinhamento.filter(ap => {
+      if(ap.padrinho == padrinho._id && ap.crianca == crianca._id){
+        return false
+      }
+
+      return true
+    })
+
+    setApadrinhamento(novoApadrinhamento)
+  }
+
+  const toggleApadrinhamento = (crianca, padrinho) => {
+    if(isCriancaApadrinhadaPorPadrinho(crianca, padrinho)){
+      return desapadrinhar(crianca, padrinho)
+    }
+
+    return apadrinhar(crianca, padrinho)
+  }
+
+  const listagemCriancaPorPadrinho = crianca => {
+    return listaPadrinhos.map(padrinho => {
+      return ( <td>
+        <label>
+          <input type="checkbox"
+          checked={isCriancaApadrinhadaPorPadrinho(crianca, padrinho)}
+          onChange={e => {
+            // e.preventDefault()
+            toggleApadrinhamento(crianca, padrinho)
+          }} />
+          <span></span>
+        </label>
+      </td>)
+    })
+  }
+
+  const listaFormatadaCriancas = () => {
+    return listaCriancas.map(crianca => {
+      return (<tr>
+        <th>{crianca.nome}</th>
+        {listagemCriancaPorPadrinho(crianca)}
+      </tr>  
+      
+      )
+    })
+  }
+
+  const listaFormatadaPadrinhos = () => {
+    return listaPadrinhos.map(padrinho => {
+      return (<th>{padrinho.nome}</th>)
+    })
+  }
 
 
-          <tr>
-            <th>Crianca 3</th>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-          </tr>
+  const listarPadrinhos = async () => {
+    // setLoading(true)
+    const data = await padrinhoService.getPadrinhos()
+    setListaPadrinhos(data)
+    // setLoading(false)
+}
+
+  const listarCriancas = async () => {
+    // setLoading(true)
+    const data = await criancaService.getCriancas()
+    setListaCriancas(data)
+    setLoading(false)
+  }
+
+  useEffect(async () => {
+    await listarPadrinhos()
+    await listarCriancas()
+
+    // setInterval(() => {console.log(apadrinhamento)}, 5000)
 
 
-          <tr>
-            <th>Crianca 4</th>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-          </tr>
+  }, [])
+
+  const loader = () => {
+    if (loading) {
+        return (
+            <div class="progress">
+                <div style={{
+                    width: '100%'
+                }} class="indeterminate"></div>
+            </div>)
+    }
+
+    return null
+}
 
 
-          <tr>
-            <th>Crianca 5</th>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-          </tr>
+  const tabela = () => (
+  <div>
+    
+    <table className="responsive-table-2 highlight">
+    <thead>
+      <tr>
+        <th></th>
+        {listaFormatadaPadrinhos()}
+      </tr>
+    </thead>
+
+    <tbody>
+      {listaFormatadaCriancas()}
+    </tbody>
+  </table>
+
+  <a class="waves-effect waves-light btn"><i class="material-icons left">compare_arrows</i>salvar</a>
+  </div>
+  )
 
 
-          <tr>
-            <th>Crianca 6</th>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-          </tr>
+  return (<div>
+    <NavBar {...props} />
+    
+    <br />
+    <div className="container">
+      <h6>Apadrinhamento</h6>
+      { loading ? loader() : tabela()}
+    </div>
+  </div>)
 
-
-          <tr>
-            <th>Crianca 7</th>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-            <td> 
-              <label>
-                <input type="checkbox" />
-                <span></span>
-              </label>
-            </td>
-          </tr>
-          
-         </tbody>
-      </table>)
-
-    return (<div>
-        <NavBar {...props} />
-        <br/>
-        <div className="container"> 
-   
-                {tabela()}
-     
-        </div>
-       
-        
-        
-        
-        </div>)
 
 
 }
 
 
 const mapStateToProps = state => {
-    return {
-        usuario: state.autenticacao.usuario
-    }
+  return {
+    usuario: state.autenticacao.usuario
+  }
 }
 
 export default connect(mapStateToProps)(ApadrinhamentoPage)

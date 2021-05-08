@@ -3018,7 +3018,7 @@ td, th {
 }
 
 @media only screen and (max-width: 1992px) {
-  table.responsive-table {
+  table.responsive-table-2 {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
@@ -3026,53 +3026,53 @@ td, th {
     position: relative;
     /* sort out borders */
   }
-  table.responsive-table td:empty:before {
+  table.responsive-table-2 td:empty:before {
     content: '\00a0';
   }
-  table.responsive-table th,
-  table.responsive-table td {
+  table.responsive-table-2 th,
+  table.responsive-table-2 td {
     margin: 0;
     vertical-align: top;
   }
-  table.responsive-table th {
+  table.responsive-table-2 th {
     text-align: left;
   }
-  table.responsive-table thead {
+  table.responsive-table-2 thead {
     display: block;
     float: left;
   }
-  table.responsive-table thead tr {
+  table.responsive-table-2 thead tr {
     display: block;
     padding: 0 10px 0 0;
   }
-  table.responsive-table thead tr th::before {
+  table.responsive-table-2 thead tr th::before {
     content: "\00a0";
   }
-  table.responsive-table tbody {
+  table.responsive-table-2 tbody {
     display: block;
     width: auto;
     position: relative;
     overflow-x: auto;
     white-space: nowrap;
   }
-  table.responsive-table tbody tr {
+  table.responsive-table-2 tbody tr {
     display: inline-block;
     vertical-align: top;
   }
-  table.responsive-table th {
+  table.responsive-table-2 th {
     display: block;
     text-align: right;
   }
-  table.responsive-table td {
+  table.responsive-table-2 td {
     display: block;
     min-height: 1.25em;
     text-align: left;
   }
-  table.responsive-table tr {
+  table.responsive-table-2 tr {
     border-bottom: none;
     padding: 0 10px;
   }
-  table.responsive-table thead {
+  table.responsive-table-2 thead {
     border: 0;
     border-right: 1px solid rgba(0, 0, 0, 0.12);
   }
