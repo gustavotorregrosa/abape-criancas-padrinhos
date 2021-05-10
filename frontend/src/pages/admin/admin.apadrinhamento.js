@@ -1,20 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react'
-import NavBar from '../components/index/navbar'
+import NavBar from '../../components/index/navbar'
 import '../assets/materialize.css'
 import { connect } from 'react-redux'
-import CriancaContext from '../contexts/CriancaContext'
-import PadrinhoContext from '../contexts/PadrinhoContext'
+import CriancaContext from '../../contexts/CriancaContext'
+import PadrinhoContext from '../../contexts/PadrinhoContext'
+import ApadrinhamentoContext from '../../contexts/ApadrinhamentoContext'
 
 const ApadrinhamentoPage = props => {
 
   const criancaService = useContext(CriancaContext)
   const padrinhoService = useContext(PadrinhoContext)
+  const apadrinhamentoService = useContext(ApadrinhamentoContext)
 
   const [listaCriancas, setListaCriancas] = useState([])
   const [listaPadrinhos, setListaPadrinhos] = useState([])
   const [loading, setLoading] = useState(true)
 
   const [apadrinhamento, setApadrinhamento] = useState([])
+
+  const listarApadrinhamento = async () => {
+    const data = await apadrinhamentoService.getApadrinhamentos()
+    setApadrinhamento(data)
+}
 
   const isCriancaApadrinhadaPorPadrinho = (crianca, padrinho) => {
     let isApadrinhada = false
@@ -109,6 +116,7 @@ const ApadrinhamentoPage = props => {
   }
 
   useEffect(async () => {
+    await listarApadrinhamento()
     await listarPadrinhos()
     await listarCriancas()
 
@@ -147,7 +155,10 @@ const ApadrinhamentoPage = props => {
     </tbody>
   </table>
 
-  <a class="waves-effect waves-light btn"><i class="material-icons left">compare_arrows</i>salvar</a>
+  <a onClick={e => {
+    e.preventDefault()
+    apadrinhamentoService.salvarApadrinhamentos(apadrinhamento)
+    }} className="waves-effect waves-light btn"><i className="material-icons left">compare_arrows</i>salvar</a>
   </div>
   )
 
@@ -161,9 +172,6 @@ const ApadrinhamentoPage = props => {
       { loading ? loader() : tabela()}
     </div>
   </div>)
-
-
-
 }
 
 

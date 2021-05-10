@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../components/index/navbar'
 import { connect } from 'react-redux'
-import Tabela from '../components/misc/tabela'
-import ModalCriaEdita from '../components/admin/criancas/modalCriaEdita'
-import ModalDeleta from '../components/admin/criancas/modalDelete'
-import CriancaContext from '../contexts/CriancaContext'
+import Tabela from '../../components/misc/tabela'
+import ModalCriaEdita from '../../components/admin/padrinhos/modalCriaEdita'
+import ModalDeleta from '../../components/admin/padrinhos/modalDelete'
+import PadrinhoContext from '../../contexts/PadrinhoContext'
 
-const CriancaPage = props => {
+const PadrinhoPage = props => {
 
-    const criancaService = useContext(CriancaContext)
+    const padrinhoService = useContext(PadrinhoContext)
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
@@ -31,33 +31,33 @@ const CriancaPage = props => {
         },
     ]
 
-    const listaCriancas = async () => {
+    const listaPadrinhos = async () => {
         setLoading(true)
-        const data = await criancaService.getCriancas()
+        const data = await padrinhoService.getPadrinhos()
         setData(data)
         setLoading(false)
     }
 
     useEffect(async () => {
-        await listaCriancas()
+        await listaPadrinhos()
     }, [])
 
     // const ativaLoading = l => setLoading(l)
 
     const openModalNew = ev => {
         ev.preventDefault()
-        const e = new CustomEvent('cria-criancas')
+        const e = new CustomEvent('cria-padrinhos')
         document.dispatchEvent(e)
     }
 
     return (<div>
-        <NavBar {...props} />
+        <NavBar {...props}/>
         <div className="container">
-            <h4>Crianças</h4>
+            <h4>Padrinhos</h4>
             <a className="waves-effect right" onClick={e => openModalNew(e)}><i className="medium material-icons">add_box</i></a>
-            <Tabela campos={campos} data={data} loading={loading} eventName="criancas" />
-            <ModalCriaEdita listaCriancas={() => listaCriancas()} />
-            <ModalDeleta listaCriancas={() => listaCriancas()} />
+            <Tabela campos={campos} data={data} loading={loading} eventName="padrinhos" />
+            <ModalCriaEdita listaPadrinhos={() => listaPadrinhos()} />
+            <ModalDeleta listaPadrinhos={() => listaPadrinhos()} />
         </div>
     </div>)
 }
@@ -68,4 +68,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(CriancaPage)
+export default connect(mapStateToProps)(PadrinhoPage)

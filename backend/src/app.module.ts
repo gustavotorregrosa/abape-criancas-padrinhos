@@ -8,6 +8,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { AutenticacaoModule } from './autenticacao/autenticacao.module';
 import { CriancasModule } from './criancas/criancas.module';
 import { PadrinhosModule } from './padrinhos/padrinhos.module';
+import { ApadrinhamentosModule } from './apadrinhamentos/apadrinhamentos.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { PadrinhosModule } from './padrinhos/padrinhos.module';
     UsuariosModule,
     AutenticacaoModule,
     CriancasModule,
-    PadrinhosModule
+    PadrinhosModule,
+    ApadrinhamentosModule
 
   ],
   controllers: [AppController],

@@ -4,9 +4,15 @@ import { connect } from 'react-redux'
 import UserContext from '../contexts/UserContext'
 
 const LoginPage = props => {
+    
+    const userService = useContext(UserContext)
+
+    useEffect(() => {
+        userService.runFirstCheck()
+    })
 
     return (<div>
-        <NavBar />
+        <NavBar {...props} />
     </div>)
 }
 

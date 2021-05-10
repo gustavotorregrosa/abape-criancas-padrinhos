@@ -15,16 +15,21 @@ const LoginModal = props => {
     const modal = useRef(null)
     let instance 
 
-    useEffect(() => {
-        instance = M.Modal.init(modal.current, {})
-        props.setOpenModal(openModal)
-       
-    }, [])
-
     const openModal = () => {
         instance.open()
         M.updateTextFields()
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            instance = M.Modal.init(modal.current, {})
+            props.setOpenModal(openModal)
+        }, 50)
+      
+       
+    }, [])
+
+
 
     const doLogin = async e => {
         e.preventDefault()

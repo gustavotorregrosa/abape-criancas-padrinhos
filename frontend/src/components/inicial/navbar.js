@@ -32,21 +32,21 @@ const IndexNavbar = props => {
             <div className="nav-wrapper container">
                 <a href="#" className="brand-logo">Abape</a>
                 <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
-                <ul id="nav-mobile" className="right hide-on-med-and-down">
+                {/* <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><a href="#" onClick={e => redirect(e, 'criancas')}>Crianças</a></li>
                     <li><a href="#" onClick={e => redirect(e, 'padrinhos')}>Padrinhos</a></li>
                     <li><a href="#" onClick={e => redirect(e, 'apadrinhamento')}>Apadrinhamento</a></li>
                     <li><a href="#" onClick={e => logout(e)}>Logout</a></li>
-                </ul>
+                </ul> */}
             </div>
         </nav>
 
-        <ul ref={navBarMobile} className="sidenav" id="mobile-demo">
+        {/* <ul ref={navBarMobile} className="sidenav" id="mobile-demo">
             <li><a href="#" onClick={e => redirect(e, 'criancas')}>Crianças</a></li>
             <li><a href="#" onClick={e => redirect(e, 'padrinhos')}>Padrinhos</a></li>
             <li><a href="#" onClick={e => redirect(e, 'apadrinhamento')}>Apadrinhamento</a></li>
             <li><a href="#" onClick={e => logout(e)}>Logout</a></li>
-        </ul>
+        </ul> */}
 
     </div>)
 }

@@ -1,14 +1,15 @@
 import React, { useContext, useEffect } from 'react'
-import NavBar from '../components/index/navbar'
+import NavBar from '../../components/index/navbar'
 import { connect } from 'react-redux'
-import UserContext from '../contexts/UserContext'
+import UserContext from '../../contexts/UserContext'
 
-const IndexPage = props => {
+const PadrinhoPage = props => {
 
     const user = useContext(UserContext)
     
     return (<div>
-        <NavBar {...props}/>
+        {/* <NavBar {...props} /> */}
+        <h3>padrinho...</h3>
     </div>)
 }
 
@@ -18,4 +19,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(IndexPage)
+export default connect(mapStateToProps)(PadrinhoPage)

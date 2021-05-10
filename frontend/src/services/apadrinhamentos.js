@@ -24,8 +24,9 @@ class ApadrinhamentoService extends Component {
     })
 
     salvarApadrinhamentos = async (apadrinhamentos) => {
+        console.log(apadrinhamentos)
         let params = {
-            url: '/apadrinhamentos',
+            url: '/apadrinhamentos/todos',
             method: 'post',
             data: { ...apadrinhamentos }
         }
