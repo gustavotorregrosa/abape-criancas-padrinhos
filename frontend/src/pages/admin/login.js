@@ -1,16 +1,15 @@
 import React, { useContext, useEffect } from 'react'
-import NavBar from '../components/index/navbar'
+import NavBar from '../../components/admin/misc/login/navbar'
 import { connect } from 'react-redux'
-import UserContext from '../contexts/UserContext'
-import CriancaAdminPage from './admin.crianca'
+import UserContext from '../../contexts/UserContext'
 
-const AdminIndexPage = props => {
+const AdminLoginPage = props => {
 
     const user = useContext(UserContext)
     
     return (<div>
         <NavBar />
-        <h3>admin index</h3>
+        <h3>admin login index</h3>
     </div>)
     
 }
@@ -21,4 +20,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(AdminIndexPage)
+export default connect(mapStateToProps)(AdminLoginPage)

@@ -6,6 +6,11 @@ import UserContext from '../../contexts/UserContext'
 const IndexPage = props => {
 
     const user = useContext(UserContext)
+
+    const redirect = (e, pagina) => {
+        e.preventDefault()
+        props?.history?.push('/' + pagina)
+    }
     
     return (<div>
         <NavBar {...props}/>
@@ -15,7 +20,7 @@ const IndexPage = props => {
             <br/> <br/>
             <a class="waves-effect waves-light btn">Padrinhos</a>
             <br/> <br/>
-            <a class="waves-effect waves-light btn">Administrador</a>
+            <a onClick={e => redirect(e, 'admin')} class="waves-effect waves-light btn">Administrador</a>
         </div>
     </div>)
 }

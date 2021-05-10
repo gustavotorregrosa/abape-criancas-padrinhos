@@ -17,6 +17,7 @@ const LoginNavbar = props => {
 
     const openLogin = e => {
         e.preventDefault()
+        alert("foi...")
         openLoginModal()
     }
 

@@ -26,7 +26,7 @@ class UserService extends Component {
     login = usuario => {
         this.alteraUsuario(usuario)
         // this.props.history.push(usuario.perfil)
-        this.props.history.push('/admin')
+        // this.props.history.push('/admin')
     }
 
     getUsuario = () => store.getState().autenticacao.usuario ?? {}

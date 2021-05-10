@@ -4,7 +4,7 @@ import { Route, Switch, withRouter, Redirect } from 'react-router'
 import IndexPage from './pages/inicial/index'
 // import PadrinhoPage from './pages/padrinhos/padrinho'
 // import CriancaPage from './pages/crianca'
-// import AdminPage from './pages/admin/admin'
+import AdminPage from './pages/admin/index'
 import UserService from './services/user'
 import UserContext from './contexts/UserContext'
 import HttpContext from './contexts/HttpContext'
@@ -49,7 +49,7 @@ function App(props) {
           <CriancaContext.Provider value={criancaService}>
             <Switch>
               {/* <Route path="/login" component={PageLogin} /> */}
-              {/* <Route path="/admin/*" component={AdminPage} /> */}
+              <Route path="/admin" component={AdminPage} />
               {/* <Route path="/padrinho" component={PadrinhoPage} /> */}
               {/* <Route path="/apadrinhamento" component={ApadrinhmantoPage} /> */}
               {/* <Route path="/padrinho/*" component={PadrinhoPage} /> */}

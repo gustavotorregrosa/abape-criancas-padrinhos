@@ -5,7 +5,7 @@ import UserContext from '../contexts/UserContext'
 import CriancaAdminPage from './admin.crianca'
 import PadrinhoAdminPage from './admin.padrinho'
 import ApadrinhamentoAdminPage from './admin/admin.apadrinhamento'
-import AdminIndexPage from './admin.index'
+import AdminIndexPage from './index'
 
 const AdminPage = props => {
 

@@ -1,6 +1,6 @@
 import React, {useRef, useEffect, useState, useContext} from 'react'
-import UserContext from '../../contexts/UserContext'
-import HttpContext from '../../contexts/HttpContext'
+import UserContext from '../../../../contexts/UserContext'
+import HttpContext from '../../../../contexts/HttpContext'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css'
 
@@ -17,6 +17,7 @@ const LoginModal = props => {
 
     const openModal = () => {
         instance.open()
+        alert("foi 2")
         M.updateTextFields()
     }
 
