@@ -13,10 +13,10 @@ const AdminPage = props => {
     
     return (<div>
       <Switch>
-        <Route path="/admin/criancas" component={CriancaAdminPage} />
+        <Route exact path="/admin/criancas" component={CriancaAdminPage} />
         <Route path="/admin/padrinhos" component={PadrinhoAdminPage} />
         <Route path="/admin/apadrinhamento" component={ApadrinhamentoAdminPage} />
-        <Route path="/admin" component={AdminIndexPage} />
+        <Route exact path="/admin" component={AdminIndexPage} />
       </Switch>
     </div>)
 }

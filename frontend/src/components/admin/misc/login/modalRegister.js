@@ -18,8 +18,11 @@ const RegisterModal = props => {
     let instance 
 
     useEffect(() => {
-        instance = M.Modal.init(modal.current, {})
-        props.setOpenModal(openModal)
+        setTimeout(() => {
+            instance = M.Modal.init(modal.current, {})
+            props.setOpenModal(openModal)
+        }, 50)
+       
        
     }, [])
 
@@ -28,9 +31,18 @@ const RegisterModal = props => {
         M.updateTextFields()
     }
 
-    const doRegister = e => {
+    const doRegister = async e => {
         e.preventDefault()
-        http.registerUser({name: 'gustavo torregrosa', email: 'gustavo.torregrosa@gmail.com', password: 'gustavo01'})
+        await http.registerUser({
+            name: nome, 
+            email, 
+            password: senha,
+            perfil: 'admin'
+        })
+
+        props.history.push('/admin')
+
+
     }
 
     const changeEmail = e => {

@@ -12,7 +12,7 @@ import { ApadrinhamentosModule } from './apadrinhamentos/apadrinhamentos.module'
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://root:example@localhost:27017',
+    MongooseModule.forRoot('mongodb://root:example@mongo:27017',
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }),
     // PassageirosModule,
     // MotoristasModule,

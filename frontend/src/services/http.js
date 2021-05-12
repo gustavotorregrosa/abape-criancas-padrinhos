@@ -92,14 +92,15 @@ class HttpService extends Component {
         this.user.login(newUser)
     }
 
-    registerUser = async ({name, email, password}) => {
+    registerUser = async ({name, email, password, perfil}) => {
         const params = {
             url: '/usuarios/salvar',
             method: 'post',
             data: {
                 nome:name,
                 email,
-                senha: password
+                senha: password,
+                perfil
             }
 
         }

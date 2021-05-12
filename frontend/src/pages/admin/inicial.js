@@ -7,16 +7,16 @@ const AdminInicialPage = props => {
 
     const user = useContext(UserContext)
 
-    // useEffect(() => {
-    //     props.history.push('/admin/login')
-    //     // console.log(user.getUsuario().email)
-    //     // if(!user.getUsuario().email){
-    //     //     props.history.push('/admin/login')
-    //     // }
-    // }, [])
+    useEffect(() => {
+        // props.history.push('/admin/login')
+        // console.log(user.getUsuario().email)
+        if(!user.getUsuario().email){
+            props.history.push('/admin/login')
+        }
+    }, [])
     
     return (<div>
-        <NavBar />
+        <NavBar {...props} />
         <h3>admin inicial</h3>
     </div>)
 

@@ -31,13 +31,14 @@ export class UsuariosService {
 
         usuario.save()
 
-        const {id, nome, email, endereco, refreshToken } = usuario
+        const {id, nome, email, sobre, perfil, refreshToken } = usuario
 
         const usuarioJWT: UsuarioJWT = {
             id,
             nome, 
             email,
-            endereco,
+            sobre,
+            perfil,
             refreshToken,
             refreshTokenValidity,
             ...this.autenticacaoService.gerarTokens(usuario)
@@ -60,31 +61,35 @@ export class UsuariosService {
 
         return await this._autentica(usuario)
 
-        usuario.refreshToken = this.autenticacaoService.createHash()
+        // usuario.refreshToken = this.autenticacaoService.createHash()
 
-        let refreshTokenValidity = new Date()
-        refreshTokenValidity.setHours(refreshTokenValidity.getHours() + 2)
-        usuario.refreshTokenValidity = refreshTokenValidity
+        // let refreshTokenValidity = new Date()
+        // refreshTokenValidity.setHours(refreshTokenValidity.getHours() + 2)
+        // usuario.refreshTokenValidity = refreshTokenValidity
 
-        usuario.save()
+        // usuario.save()
 
-        const {id, nome, endereco, refreshToken } = usuario
+        // const {id, nome, endereco, refreshToken } = usuario
 
-        const usuarioJWT: UsuarioJWT = {
-            id,
-            nome, 
-            email,
-            endereco,
-            refreshToken,
-            refreshTokenValidity,
-            ...this.autenticacaoService.gerarTokens(usuario)
-        }
+        // const usuarioJWT: UsuarioJWT = {
+        //     id,
+        //     nome, 
+        //     email,
+        //     endereco,
+        //     refreshToken,
+        //     refreshTokenValidity,
+        //     ...this.autenticacaoService.gerarTokens(usuario)
+        // }
 
-        return usuarioJWT
+        // return usuarioJWT
 
     }
 
     addUsuario = async (usuarioDTO: ICriaUsuario): Promise<UsuarioJWT> => {
+        // if(usuarioDTO.perfil == 'admin'){
+        //     return
+        // }
+
         const salt = await genSalt(HASH_ROUNDS)
         usuarioDTO.senha = await hash(usuarioDTO.senha, salt)
 

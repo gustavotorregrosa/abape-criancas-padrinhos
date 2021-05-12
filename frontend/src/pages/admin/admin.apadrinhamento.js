@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import NavBar from '../../components/index/navbar'
-import '../assets/materialize.css'
+import '../../assets/materialize.css'
 import { connect } from 'react-redux'
 import CriancaContext from '../../contexts/CriancaContext'
 import PadrinhoContext from '../../contexts/PadrinhoContext'

@@ -17,7 +17,6 @@ const LoginNavbar = props => {
 
     const openLogin = e => {
         e.preventDefault()
-        alert("foi...")
         openLoginModal()
     }
 
@@ -43,8 +42,8 @@ const LoginNavbar = props => {
             <li><a href="#" onClick={e => openRegister(e)}>Registro</a></li>
         </ul>
 
-        <LoginModal setOpenModal={f => openLoginModal = f}  />
-        <RegisterModal setOpenModal={f => openRegisterModal = f} />
+        <LoginModal {...props} setOpenModal={f => openLoginModal = f}  />
+        <RegisterModal {...props} setOpenModal={f => openRegisterModal = f} />
 
 
     </div>)

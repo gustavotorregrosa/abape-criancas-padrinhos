@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import UserContext from '../../contexts/UserContext'
 import PageInicial from './inicial'
 import AdminLoginPage from './login'
+import AdminCriancasPage from './admin.crianca'
+import AdminPadrinhosPage from './admin.padrinho'
+import ApadrinhamentoAdminPage from './admin.apadrinhamento'
 
 const AdminIndexPage = props => {
 
@@ -25,8 +28,9 @@ const AdminIndexPage = props => {
     return (<div>
         <Switch>
           <Route path="/admin/login" component={AdminLoginPage} />
-          {/* <Route path="/admin/padrinhos" component={PadrinhoAdminPage} />
-          <Route path="/admin/apadrinhamento" component={ApadrinhamentoAdminPage} /> */}
+          <Route path="/admin/criancas" component={AdminCriancasPage} />
+          <Route path="/admin/padrinhos" component={AdminPadrinhosPage} />
+          <Route path="/admin/apadrinhamento" component={ApadrinhamentoAdminPage} />
           <Route exact path="/admin/" component={PageInicial} />
         </Switch>
       </div>)

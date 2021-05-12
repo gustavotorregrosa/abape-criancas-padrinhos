@@ -5,6 +5,7 @@ export interface Usuario extends Document {
     readonly id: string;
     nome: string;
     email: string;
-    endereco: string;
+    sobre: string;
+    perfil: string
     
 }

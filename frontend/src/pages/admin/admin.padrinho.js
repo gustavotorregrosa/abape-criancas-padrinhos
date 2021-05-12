@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import NavBar from '../components/index/navbar'
+import NavBar from '../../components/index/navbar'
 import { connect } from 'react-redux'
 import Tabela from '../../components/misc/tabela'
 import ModalCriaEdita from '../../components/admin/padrinhos/modalCriaEdita'

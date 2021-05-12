@@ -8,7 +8,7 @@ const AdminLoginPage = props => {
     const user = useContext(UserContext)
     
     return (<div>
-        <NavBar />
+        <NavBar {...props} />
         <h3>admin login index</h3>
     </div>)
     

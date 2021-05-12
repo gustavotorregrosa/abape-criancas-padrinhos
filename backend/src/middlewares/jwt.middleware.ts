@@ -2,8 +2,6 @@ import { HttpException, HttpStatus, Injectable, NestMiddleware } from "@nestjs/c
 import { AutenticacaoService } from "src/autenticacao/autenticacao.service";
 import { sign, verify } from 'jsonwebtoken'
 
-
-
 @Injectable()
 export class JwtMiddleware implements NestMiddleware {
 

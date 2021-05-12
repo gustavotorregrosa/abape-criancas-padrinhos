@@ -17,7 +17,6 @@ const LoginModal = props => {
 
     const openModal = () => {
         instance.open()
-        alert("foi 2")
         M.updateTextFields()
     }
 
@@ -26,16 +25,14 @@ const LoginModal = props => {
             instance = M.Modal.init(modal.current, {})
             props.setOpenModal(openModal)
         }, 50)
-      
-       
     }, [])
-
-
 
     const doLogin = async e => {
         e.preventDefault()
 
         await http.loginUser({email, password})
+
+        props.history.push('/admin')
         
     }
 

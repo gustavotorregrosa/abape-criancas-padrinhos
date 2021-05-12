@@ -33,7 +33,4 @@ export class UsuariosController {
         return await this.usuariosService.autenticaUsuario(usuario)
     }
 
-
-
-
 }

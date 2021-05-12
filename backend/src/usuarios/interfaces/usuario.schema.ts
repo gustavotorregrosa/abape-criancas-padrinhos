@@ -6,5 +6,6 @@ export const UsuarioSchema = new mongoose.Schema({
     senha: {type: String, required: true, select: false},
     refreshToken: {type: String, required: true, select: false},
     refreshTokenValidity: {type: Date},
-    endereco: {type: String}
+    sobre: {type: String},
+    perfil: {type: String}
 }, {timestamps: true, collection: 'usuarios'});
